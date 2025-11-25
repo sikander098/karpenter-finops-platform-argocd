@@ -1,7 +1,10 @@
 apiVersion: v2
-name: otel-demo-wrapper
+name: astronomy-wrapper
+description: Wrapper chart for OTel Demo
+type: application
 version: 1.0.0
+appVersion: "1.0.0"
 dependencies:
-- name: opentelemetry-demo
-  version: 0.38.6
-  repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+  - name: opentelemetry-demo
+    version: 0.38.6
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
