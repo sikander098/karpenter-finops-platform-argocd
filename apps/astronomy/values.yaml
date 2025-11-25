@@ -18,7 +18,7 @@ opentelemetry-demo:
 
     checkoutService:
       schedulingRules:
-        nodeSelector:
+        nodeSelector:  # <--- THIS WAS MISSING
           karpenter.sh/capacity-type: spot
 
     adService:
