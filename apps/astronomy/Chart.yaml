@@ -1,0 +1,7 @@
+apiVersion: v2
+name: otel-demo-wrapper
+version: 1.0.0
+dependencies:
+- name: opentelemetry-demo
+  version: 0.38.6
+  repository: https://open-telemetry.github.io/opentelemetry-helm-charts
