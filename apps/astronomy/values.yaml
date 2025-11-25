@@ -1,2 +1,2 @@
-opentelemetry-demo:
-  fullnameOverride: "otel-demo"
+# No overrides. Using Chart defaults.
+# Workload will inherit the Cluster's Default NodePool (Spot).
