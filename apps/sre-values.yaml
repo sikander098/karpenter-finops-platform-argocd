@@ -1,0 +1,28 @@
+# Configuration for OpenTelemetry Demo
+# Forces stateless components to Spot Instances
+components:
+  loadGenerator:
+    schedulingRules:
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
+    resources:
+      limits:
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+
+  frontend:
+    schedulingRules:
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
+
+  checkoutService:
+    schedulingRules:
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
+
+  adService:
+    schedulingRules:
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
