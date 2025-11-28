@@ -1,0 +1,17 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: frontend-cron-scaler
+  namespace: astronomy
+spec:
+  scaleTargetRef:
+    name: otel-demo-frontend # The Deployment to scale
+  minReplicaCount: 1
+  maxReplicaCount: 10
+  triggers:
+  - type: cron
+    metadata:
+      timezone: UTC
+      start: "0 0 * * *"      # Start of day
+      end: "23 59 * * *"      # End of day (Always active for demo)
+      desiredReplicas: "5"    # Scale to 5
