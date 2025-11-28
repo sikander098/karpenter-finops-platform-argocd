@@ -5,13 +5,13 @@ metadata:
   namespace: astronomy
 spec:
   scaleTargetRef:
-    name: otel-demo-frontend
-  minReplicaCount: 1
+    name: frontend   # <--- FIXED! (Was otel-demo-frontend)
+  minReplicaCount: 5 # Force scale to 5
   maxReplicaCount: 10
   triggers:
   - type: cron
     metadata:
       timezone: UTC
-      start: "0 0 * * *"      # Always Active (Start of day)
-      end: "23 59 * * *"      # End of day
-      desiredReplicas: "5"    # FORCE SCALE TO 5
+      start: "0 0 * * *"
+      end: "23 59 * * *"
+      desiredReplicas: "5"
