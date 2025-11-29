@@ -11,11 +11,7 @@ spec:
   triggers:
   - type: prometheus
     metadata:
-      # USE THE INTERNAL APP PROMETHEUS (It has the data!)
       serverAddress: http://prometheus.astronomy.svc.cluster.local:9090
-      
-      # The Metric
-      query: sum(rate(http_server_request_duration_seconds_count{service_name="frontend"}[1m]))
-      
-      # Threshold: 10 RPS per pod
+      # UPDATED QUERY: Using 'job' instead of 'service_name'
+      query: sum(rate(http_server_request_duration_seconds_count{job="frontend"}[1m]))
       threshold: "10"
