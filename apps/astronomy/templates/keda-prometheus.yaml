@@ -1,0 +1,21 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: frontend-prometheus-scaler
+  namespace: astronomy
+spec:
+  scaleTargetRef:
+    name: frontend
+  minReplicaCount: 1
+  maxReplicaCount: 20
+  triggers:
+  - type: prometheus
+    metadata:
+      # USE THE INTERNAL APP PROMETHEUS (It has the data!)
+      serverAddress: http://prometheus.astronomy.svc.cluster.local:9090
+      
+      # The Metric
+      query: sum(rate(http_server_request_duration_seconds_count{service_name="frontend"}[1m]))
+      
+      # Threshold: 10 RPS per pod
+      threshold: "10"
