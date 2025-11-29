@@ -1,0 +1,15 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: frontend-cpu-scaler
+  namespace: astronomy
+spec:
+  scaleTargetRef:
+    name: frontend
+  minReplicaCount: 1
+  maxReplicaCount: 20
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "50" # Target 50% CPU utilization
