@@ -1,0 +1,10 @@
+spec:
+  template:
+    spec:
+      containers:
+      - name: prometheus-server
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 512Mi

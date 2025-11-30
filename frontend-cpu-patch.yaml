@@ -1,0 +1,8 @@
+spec:
+  template:
+    spec:
+      containers:
+      - name: frontend
+        resources:
+          requests:
+            cpu: 100m  # This gives KEDA the baseline number it needs

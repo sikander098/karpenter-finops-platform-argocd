@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: astronomy-ingress
+  namespace: astronomy
+  annotations:
+    # 1. Use the AWS Load Balancer Controller
+    kubernetes.io/ingress.class: alb
+    
+    # 2. Make it public (Internet Facing)
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    
+    # 3. Use IP Mode (Required for efficient routing)
+    alb.ingress.kubernetes.io/target-type: ip
+    
+    # 4. Health Check Settings (Crucial for stability)
+    alb.ingress.kubernetes.io/healthcheck-path: /
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-proxy
+                port:
+                  number: 8080
