@@ -9,9 +9,9 @@ spec:
     canary:
       steps:
       - setWeight: 20
-      - pause: {}          # <--- Wait for human approval
+      - pause: {}
       - setWeight: 40
-      - pause: {duration: 10} # <--- Wait 10 seconds automatically
+      - pause: {duration: 10}
       - setWeight: 60
       - pause: {duration: 10}
       - setWeight: 80
@@ -25,9 +25,13 @@ spec:
       labels:
         app: rollouts-demo
     spec:
+      # --- THIS IS THE FIX ---
+      nodeSelector:
+        karpenter.sh/capacity-type: spot
+      # -----------------------
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:blue # <--- Starts as BLUE
+        image: argoproj/rollouts-demo:yellow
         ports:
         - name: http
           containerPort: 8080
