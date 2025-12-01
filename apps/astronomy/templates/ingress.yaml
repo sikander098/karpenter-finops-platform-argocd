@@ -4,27 +4,18 @@ metadata:
   name: astronomy-ingress
   namespace: astronomy
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    # We remove the rewrite target because the Proxy expects the full path
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      # 1. Main Shop -> Frontend
-      - path: /()(.*)
-        pathType: ImplementationSpecific
+      # Send ALL traffic to the internal Frontend Proxy
+      - path: /
+        pathType: Prefix
         backend:
           service:
-            name: frontend
+            name: frontend-proxy
             port:
               number: 8080
-      
-      # 2. Jaeger UI
-      - path: /jaeger(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: jaeger-query
-            port:
-              number: 16686
