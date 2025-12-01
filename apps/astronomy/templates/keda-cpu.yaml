@@ -7,9 +7,9 @@ spec:
   scaleTargetRef:
     name: frontend
   minReplicaCount: 1
-  maxReplicaCount: 20
+  maxReplicaCount: 10
   triggers:
   - type: cpu
+    metricType: Utilization # <--- THE FIX (Moved from metadata to top level)
     metadata:
-      type: Utilization
-      value: "50" # Target 50% CPU utilization
+      value: "50"
